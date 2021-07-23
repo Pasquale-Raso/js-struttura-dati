@@ -8,6 +8,21 @@
     <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body>
+    <select id="filter">
+      <option selected value="all">Tutte</option>
+      <option value="id">Id</option>
+      <option value="name">Nome</option>
+      <option value="costoManaCombinato">Costi mana combinato</option>
+      <option value="cardType">Tipo carta</option>
+      <option value="subType">Subtipo carta</option>
+      <option value="constitution">Costituzione</option>
+      <option value="strength">Forza</option>
+    </select>
+    <input type="text" id="search" placeholder="Cosa cerchi?" class="hidden" />
+
+    <button id="button">Filtra</button>
+    <hr />
+
     <section id="cards" class="conteiner"></section>
     <script src="./js/javascript.js"></script>
   </body>

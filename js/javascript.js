@@ -1,4 +1,4 @@
-const myDeck = [
+const fullDeck = [
   {
     id: 1,
     name: "Bloodfire Colossus",
@@ -116,17 +116,15 @@ const myDeck = [
 //!________________________STAMPA IN HTML(FUNCTION JS6)__________________________
 
 const renderDeck = (deck) => {
-  const cardSection = document.getElementById("cards");
-
   let deckTemplate = "";
   for (let i = 0; i < deck.length; i++) {
     const currentCard = deck[i];
     deckTemplate += createCardTemplate(currentCard);
   }
-
-  cardSection.innerHTML = deckTemplate;
+  cardsSection.innerHTML = deckTemplate;
 };
-renderDeck(myDeck);
+const cardsSection = document.getElementById("cards");
+renderDeck(fullDeck);
 
 //! ________________________TEMPLATE (FUNCTION JS3)__________________________
 
@@ -230,3 +228,38 @@ function createCardTemplate(card) {
 
   return cardTemplate;
 }
+
+//! ________________________filtri________________________
+const inputField = document.getElementById("search");
+const selectField = document.getElementById("filter");
+const button = document.getElementById("button");
+
+// intercettare il cambiamento della tendina
+
+selectField.addEventListener("change", () => {
+  const currentValue = selectField.value;
+  if (currentValue !== "all") {
+    inputField.classList.remove("hidden");
+  } else {
+    inputField.classList.add("hidden");
+  }
+});
+
+button.addEventListener("click", () => {
+  const inputValue = inputField.value;
+  const selectValue = selectField.value;
+
+  if (selectValue === "all") {
+    renderDeck(fullDeck, cardsSection);
+    return;
+  }
+
+  const filteredDeck = [];
+  for (let i = 0; i < fullDeck.length; i++) {
+    const currentCard = fullDeck[i];
+    if (currentCard[selectValue] == inputValue) {
+      filteredDeck.push(currentCard);
+    }
+  }
+  renderDeck(filteredDeck, cardsSection);
+});
